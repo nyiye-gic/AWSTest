@@ -34,9 +34,9 @@ jobs:
           pip install -r NyiYeTesting/hello_world/requirements.txt
 
       - name: SAM ビルド
-        working-directory: testProject
+        working-directory: NyiYeTesting
         run: sam build
 
       - name: SAM デプロイ
-        working-directory: testProject
+        working-directory: NyiYeTesting
         run: sam deploy --no-confirm-changeset --stack-name test-project --capabilities CAPABILITY_IAM
