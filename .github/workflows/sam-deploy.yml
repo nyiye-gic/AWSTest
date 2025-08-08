@@ -3,7 +3,7 @@ name: Deploy AWS SAM
 on:
   push:
     branches:
-      - main  # Run when pushed to main branch
+      - main  # Run when pushed to the develop branch
 
 jobs:
   deploy:
@@ -37,20 +37,6 @@ jobs:
         working-directory: NyiYeTesting
         run: sam build
 
-      - name: SAM パッケージ
-        working-directory: NyiYeTesting
-        run: sam package \
-          --template-file template.yaml \
-          --s3-bucket ${{ secrets.SAM_DEPLOY_BUCKET }} \
-          --output-template-file packaged.yaml \
-          --region ap-northeast-1
-
       - name: SAM デプロイ
         working-directory: NyiYeTesting
-        run: sam deploy \
-          --template-file packaged.yaml \
-          --stack-name NyiYeTesting \
-          --capabilities CAPABILITY_IAM \
-          --region ap-northeast-1 \
-          --no-confirm-changeset \
-          --no-fail-on-empty-changeset
+        run: sam deploy --no-confirm-changeset --stack-name NyiYeTesting --capabilities CAPABILITY_IAM
