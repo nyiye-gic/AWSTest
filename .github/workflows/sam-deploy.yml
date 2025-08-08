@@ -39,4 +39,9 @@ jobs:
 
       - name: SAM デプロイ
         working-directory: NyiYeTesting
-        run: sam deploy --no-confirm-changeset --stack-name NyiYeTesting --capabilities CAPABILITY_IAM
+        run: sam deploy \
+          --stack-name NyiYeTesting \
+          --s3-bucket ${{ secrets.SAM_DEPLOY_BUCKET }} \
+          --capabilities CAPABILITY_IAM \
+          --region ap-northeast-1 \
+          --no-confirm-changeset
